@@ -9,13 +9,7 @@ import argparse
 import numpy as np
 from astropy.table import Table, vstack, join
 from astropy.io.misc.hdf5 import write_table_hdf5
-# from lst_scripts.reorganize_dl1hiperta_to_dl1lstchain import add_disp_and_mc_type_to_parameters_table
-import copy
-import pandas as pd
-import astropy.units as u
-from lstchain.io.io import dl1_params_lstcam_key, dl1_images_lstcam_key, add_column_table
-from lstchain.reco.disp import disp
-from lstchain.reco.utils import sky_to_camera
+from lstmcpipe.hiperta.reorganize_dl1hiperta_to_dl1lstchain import add_disp_and_mc_type_to_parameters_table
 
 parser = argparse.ArgumentParser(description="Re-organize the dl1 `standard` output file from either the "
                                              "hiptecta_r1_to_dl1 or hiperta_r1_dl1 to the lstchain DL1 structure")
@@ -35,76 +29,6 @@ parser.add_argument('--outfile', '-o',
                     )
 
 
-def add_disp_and_mc_type_to_parameters_table(dl1_file, table_path):
-    """
-    HARDCODED function obtained from `lstchain.reco.dl0_to_dl1` because `mc_alt_tel` and `mc_az_tel` are zipped within
-    `run_array_direction`.
-    1. Reconstruct the disp parameters and source position from a DL1 parameters table and write the result in the file.
-    2. Computes mc_type from the name of the file.
-
-
-    Parameters
-    ----------
-    dl1_file: HDF5 DL1 file containing the required field in `table_path`:
-        - mc_alt
-        - mc_az
-        - mc_alt_tel
-        - mc_az_tel
-
-    table_path: path to the parameters table in the file
-
-    Returns
-    -------
-        None
-    """
-    with tables.open_file(dl1_file) as hfile:
-        run_array_dir = copy.copy(hfile.root.simulation.run_config.col('run_array_direction')[0])
-        # Remember that /telescope has been moved previously
-        focal = copy.copy(hfile.root.instrument.telescope.optics.col('equivalent_focal_length')[0])
-
-    df = pd.read_hdf(dl1_file, key=table_path)
-    source_pos_in_camera = sky_to_camera(df.mc_alt.values * u.rad,
-                                         df.mc_az.values * u.rad,
-                                         focal * u.m,
-                                         run_array_dir[1] * u.rad,
-                                         run_array_dir[0] * u.rad,
-                                         )
-
-    disp_parameters = disp(df.x.values * u.m,
-                           df.y.values * u.m,
-                           source_pos_in_camera.x,
-                           source_pos_in_camera.y)
-
-    with tables.open_file(dl1_file, mode="a") as file:
-        tab = file.root[table_path]
-        add_column_table(tab, tables.Float32Col, 'disp_dx', disp_parameters[0].value)
-        tab = file.root[table_path]
-        add_column_table(tab, tables.Float32Col, 'disp_dy', disp_parameters[1].value)
-        tab = file.root[table_path]
-        add_column_table(tab, tables.Float32Col, 'disp_norm', disp_parameters[2].value)
-        tab = file.root[table_path]
-        add_column_table(tab, tables.Float32Col, 'disp_angle', disp_parameters[3].value)
-        tab = file.root[table_path]
-        add_column_table(tab, tables.Float32Col, 'disp_sign', disp_parameters[4])
-        tab = file.root[table_path]
-        add_column_table(tab, tables.Float32Col, 'src_x', source_pos_in_camera.x.value)
-        tab = file.root[table_path]
-        add_column_table(tab, tables.Float32Col, 'src_y', source_pos_in_camera.y.value)
-        tab = file.root[table_path]
-        add_column_table(tab, tables.Float32Col, 'mc_alt_tel', np.ones(len(df)) * run_array_dir[1])
-        tab = file.root[table_path]
-        add_column_table(tab, tables.Float32Col, 'mc_az_tel', np.ones(len(df)) * run_array_dir[0])
-        if 'gamma' in dl1_file:
-            tab = file.root[table_path]
-            add_column_table(tab, tables.Float32Col, 'mc_type', np.zeros(len(df)))
-        if 'electron' in dl1_file:
-            tab = file.root[table_path]
-            add_column_table(tab, tables.Float32Col, 'mc_type', np.ones(len(df)))
-        if 'proton' in dl1_file:
-            tab = file.root[table_path]
-            add_column_table(tab, tables.Float32Col, 'mc_type', 101 * np.ones(len(df)))
-
-
 def stack_and_write_images_table(input_filename, hfile_out, node_dl1_event):
     """
     Stack all the `tel_00X` image tables (in case they exit) and write in the v0.6 file
@@ -116,10 +40,10 @@ def stack_and_write_images_table(input_filename, hfile_out, node_dl1_event):
     """
     telescope_node = node_dl1_event.telescope
 
-    imag_per_tels = [Table(table_img.read()) for table_img in telescope_node.image]
+    imag_per_tels = [Table(table_img.read()) for table_img in telescope_node.images]
     image_table = vstack(imag_per_tels)
 
-    for tab in telescope_node.image:
+    for tab in telescope_node.images:
         hfile_out.remove_node(tab)
 
     # Todo change names of column `image_mask` to `` ??
@@ -127,7 +51,7 @@ def stack_and_write_images_table(input_filename, hfile_out, node_dl1_event):
     dump_plus_copy_node_to_create_new_table(input_filename,
                                             hfile_out,
                                             image_table,
-                                            hfile_out.root.dl1.event.telescope.image,
+                                            hfile_out.root.dl1.event.telescope.images,
                                             newname_pointer='LST_LSTCam',
                                             tmp_name='imgsTable')
 
@@ -168,15 +92,10 @@ def stack_and_write_parameters_table(input_filename, hfile_out, node_dl1_event, 
     parameter_table.add_column(parameter_table['width'] / parameter_table['length'], name='wl')
 
     # Param table is indeed huge - it contains all the mc_events parameters (from v0.6 !!) too
-    try:
-        mc_shower_pointer = output_mc_table_pointer.mc_shower
-    except:
-        mc_shower_pointer = None
-    if mc_shower_pointer is not None:
-        mc_event_table = Table(mc_shower_pointer.read())
-        mc_event_table.remove_column('obs_id')
-        parameter_table = join(parameter_table, mc_event_table, keys='event_id')
-        parameter_table.add_column(np.log10(parameter_table['mc_energy']), name='log_mc_energy')
+    mc_event_table = Table(output_mc_table_pointer.mc_shower.read())
+    mc_event_table.remove_column('obs_id')
+    parameter_table = join(parameter_table, mc_event_table, keys='event_id')
+    parameter_table.add_column(np.log10(parameter_table['mc_energy']), name='log_mc_energy')
 
     dump_plus_copy_node_to_create_new_table(input_filename,
                                             hfile_out,
@@ -261,22 +180,19 @@ def create_hfile_out(input_filename, outfile_name, sim_pointer08, config_pointer
     hfile_out.create_group('/', 'simulation')
     hfile_out.create_group('/', 'dl1')
 
-    if sim_pointer08 is None:
-        pass
-    else:
-        # Simulation node V0.6
-        #    /simulation (Group) 'Simulation information of the run'
-        #       children := ['mc_event' (Table), 'run_config' (Table), 'thrown_event_distribution' (Table)]
-        hfile_out.copy_node(sim_pointer08.service.shower_distribution,
-                            newparent=hfile_out.root.simulation,
-                            newname='thrown_event_distribution',
-                            recursive=True,
-                            filters=filter_pointer)
-        hfile_out.copy_node(config_pointer08.simulation.run,
-                            newparent=hfile_out.root.simulation,
-                            newname='run_config',
-                            recursive=True,
-                            filters=filter_pointer)
+    # Simulation node V0.6
+    #    /simulation (Group) 'Simulation information of the run'
+    #       children := ['mc_event' (Table), 'run_config' (Table), 'thrown_event_distribution' (Table)]
+    hfile_out.copy_node(sim_pointer08.service.shower_distribution,
+                        newparent=hfile_out.root.simulation,
+                        newname='thrown_event_distribution',
+                        recursive=True,
+                        filters=filter_pointer)
+    hfile_out.copy_node(config_pointer08.simulation.run,
+                        newparent=hfile_out.root.simulation,
+                        newname='run_config',
+                        recursive=True,
+                        filters=filter_pointer)
 
     # Instrument node V0.6
     #    --instrument (Group)
@@ -308,44 +224,25 @@ def create_hfile_out(input_filename, outfile_name, sim_pointer08, config_pointer
                                            filters=filter_pointer)
     # This will only happen on ctapipe, not RTA
     # hfile_out.remove_node(dl1_event_node06.telescope.trigger)  # Table stored twice, remove to avoid problems.
-    try:
-        hfile_out.rename_node(dl1_event_node06.telescope.images, newname='image')
-    except tables.exceptions.NoSuchNodeError as e:
-        print(f' ** {e} Exception: No images group in the file in dl1/event/telescope/. \n'
-              f'        Check the merging configuration, indeed.')
-        pass
 
-    try:
-        subarray_pointer = hfile_out.root.dl1.event.subarray
-        # root.dl1.event.subarray.trigger
-    except tables.exceptions.NoSuchNodeError as e:
-        print(f' ** {e} Exception: No subarray pointer in dl1/event.')
-        subarray_pointer = None
+    subarray_pointer = hfile_out.root.dl1.event.subarray
+    hfile_out.copy_node(sim_pointer08.event.subarray.shower,
+                        newparent=subarray_pointer,
+                        newname="mc_shower",
+                        recursive=True,
+                        filters=filter_pointer)
 
-    if sim_pointer08 is None:
-        pass
-    else:
-        hfile_out.copy_node(sim_pointer08.event.subarray.shower,
-                            newparent=subarray_pointer,
-                            newname="mc_shower",
-                            recursive=True,
-                            filters=filter_pointer)
-    if subarray_pointer is None or sim_pointer08 is None:
-        pass
-    else:
-        rename_mc_shower_colnames(input_filename,
-                                  hfile_out,
-                                  dl1_event_node06,
-                                  subarray_pointer
-                                  )
-
+    rename_mc_shower_colnames(input_filename,
+                              hfile_out,
+                              dl1_event_node06,
+                              subarray_pointer
+                              )
     stack_and_write_parameters_table(input_filename,
                                      hfile_out,
                                      dl1_event_node06,
                                      subarray_pointer
                                      )
-
-    if 'image' in dl1_event_node06.telescope:
+    if 'images' in dl1_event_node06.telescope:
         stack_and_write_images_table(input_filename,
                                      hfile_out,
                                      dl1_event_node06
@@ -365,12 +262,7 @@ def main(input_filename, output_filename):
     hfile = tables.open_file(input_filename, 'r')
 
     # dl1 v0.8 Pointers
-    try:
-        simulation_v08 = hfile.root.simulation
-    except tables.exceptions.NoSuchNodeError as e:
-        print(f' ** {e} exception: No Simulation group found in the root group of the file.')
-        simulation_v08 = None
-
+    simulation_v08 = hfile.root.simulation
     configuration_v08 = hfile.root.configuration
     dl1_v08 = hfile.root.dl1
     filter_v08 = hfile.filters
@@ -378,10 +270,7 @@ def main(input_filename, output_filename):
     create_hfile_out(input_filename, output_filename, simulation_v08, configuration_v08, dl1_v08, filter_v08)
 
     # Add disp_* and mc_type to the parameters table.
-    if simulation_v08 is None:
-        pass
-    else:
-        add_disp_and_mc_type_to_parameters_table(output_filename, 'dl1/event/telescope/parameters/LST_LSTCam')
+    add_disp_and_mc_type_to_parameters_table(output_filename, 'dl1/event/telescope/parameters/LST_LSTCam')
 
     hfile.close()
 
