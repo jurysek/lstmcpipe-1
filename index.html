@@ -1,0 +1,378 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>lstMCpipe &#8212; lstmcpipe 0.8.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Production list" href="productions.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="lstmcpipe">
+<h1>lstMCpipe<a class="headerlink" href="#lstmcpipe" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://github.com/cta-observatory/lstmcpipe/"><img alt="code" src="https://img.shields.io/badge/lstmcpipe-code-green" /></a> <a class="reference external" href="https://cta-observatory.github.io/lstmcpipe/"><img alt="documentation" src="https://img.shields.io/badge/lstmcpipe-documentation-orange" /></a> <a class="reference external" href="https://github.com/cta-observatory/lstmcpipe/actions?query=workflow%3ACI"><img alt="CI" src="https://github.com/cta-observatory/lstmcpipe/workflows/CI/badge.svg?branch=master" /></a> <a class="reference external" href="https://codecov.io/gh/cta-observatory/lstmcpipe"><img alt="coverage" src="https://codecov.io/gh/cta-observatory/lstmcpipe/branch/master/graph/badge.svg" /></a></p>
+<p>Scripts to ease the reduction of MC data on the LST cluster at La Palma.
+With this package, the analysis/creation of R1/DL0/DL1/DL2/IRFs can be orchestrated.</p>
+<p>Contact:
+Thomas Vuillaume, thomas.vuillaume [at] lapp.in2p3.fr
+Enrique Garcia, garcia [at] lapp.in2p3.fr
+Lukas Nickel, lukas.nickel [at] tu-dortmund.de</p>
+<section id="cite-us">
+<h2>Cite us<a class="headerlink" href="#cite-us" title="Permalink to this headline">¶</a></h2>
+<a class="reference external image-reference" href="https://doi.org/10.5281/zenodo.6460727"><img alt="https://zenodo.org/badge/DOI/10.5281/zenodo.6460727.svg" src="https://zenodo.org/badge/DOI/10.5281/zenodo.6460727.svg" /></a>
+<p>If you use lstMCpipe, please cite it using Zenodo from the following URL: <a class="reference external" href="https://doi.org/10.5281/zenodo.6460727">https://doi.org/10.5281/zenodo.6460727</a></p>
+</section>
+<section id="install">
+<h2>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
+<p>As as user:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">raw</span><span class="o">.</span><span class="n">githubusercontent</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">cta</span><span class="o">-</span><span class="n">observatory</span><span class="o">/</span><span class="n">lstmcpipe</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">environment</span><span class="o">.</span><span class="n">yml</span>
+<span class="n">conda</span> <span class="n">env</span> <span class="n">create</span> <span class="o">-</span><span class="n">f</span> <span class="n">environment</span><span class="o">.</span><span class="n">yml</span>
+<span class="n">conda</span> <span class="n">activate</span> <span class="n">lstmcpipe</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">lstmcpipe</span>
+</pre></div>
+</div>
+<p>This will setup a new enviroment with lstchain and other needed tools available in supported versions.
+If you already have your lstchain conda environment, you may simply activate it and install lstmcpipe there using <cite>pip install lstmcpipe</cite>.</p>
+<p>HIPERTA (referred to as rta in the following) support is builtin, but no installation instructions can be provided as of now.</p>
+<p>Alternatively, you can install <cite>lstmcpipe</cite> in your own enviroment to use different versions of the
+analysis pipelines.
+WARNING: Due to changing APIs and data models, we cannot support other versions than the ones specified in
+the enviroment.</p>
+<p>As as developer:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">cta</span><span class="o">-</span><span class="n">observatory</span><span class="o">/</span><span class="n">lstmcpipe</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">lstmcpipe</span>
+<span class="n">conda</span> <span class="n">env</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">lstmcpipe_dev</span> <span class="o">-</span><span class="n">f</span> <span class="n">environment</span><span class="o">.</span><span class="n">yml</span>
+<span class="n">conda</span> <span class="n">activate</span> <span class="n">lstmcpipe_dev</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="o">.</span>
+<span class="n">pre</span><span class="o">-</span><span class="n">commit</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>This will setup a pre-commit hook: Given that you are in the right enviroment, it will run and format files you are about
+to commit with <cite>black</cite>. (You need to stage the changes again after that). This ensures the formatting of the
+code follows our guidelines and there is less work dealing with the code checker in the CI.</p>
+</section>
+<section id="requesting-a-mc-analysis">
+<h2>Requesting a MC analysis<a class="headerlink" href="#requesting-a-mc-analysis" title="Permalink to this headline">¶</a></h2>
+<p>You may find the list of already run productions in the documentation.
+Please check in this list that the request you are about to make does not exist already!</p>
+<p>As a LST member, you may require a MC analysis with a specific configuration, for example to later analyse a specific source with tuned MC parameters.</p>
+<p>To do so, please:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork">Open a pull request from your fork</a> into lstMCpipe, adding the desired configuration in a new directory named <cite>date_ProdID</cite> in <cite>production_configs</cite>.</p></li>
+<li><p>You may have a look at the <code class="docutils literal notranslate"><span class="pre">production_configs/template_prod</span></code> as an example.</p></li>
+<li><p>Add a descriptive production ID (e.g. <code class="docutils literal notranslate"><span class="pre">src***_psf_tuned</span></code>) to you directory and configuration.</p></li>
+<li><p>The requested config must contain:</p></li>
+</ol>
+<ul class="simple">
+<li><p>a lstchain config file (please provide an exhaustive config that will help others and provide a more explicit provenance information)</p></li>
+<li><p>a lstmcpipe config file</p></li>
+<li><p>a readme with a short description of why you require this analysis to be run. <strong>Do not add information that should not appear publicly</strong> (such as source names) here. If you are requesting a production for a specific new source, please edit <a class="reference external" href="https://www.lst1.iac.es/wiki/index.php/MC_analysis_and_IRF_production#lstmcpipe_productions">this table on LST wiki</a>. Also add the command line to generate the lstmcpipe config, that will help debugging.</p></li>
+</ul>
+<p>The proposed configuration will be tested for validity by continuous integration tests and we will interact with you to run the analysis on the cluster at La Palma.</p>
+<p>Depending on the number of requests, we may give priorities.</p>
+</section>
+<section id="quickstart">
+<h2>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h2>
+<p>To generate your lstmcpipe configuration file, use <cite>lstmcpipe_generate_config</cite> command.
+If the type of production you want is not listed in the existing ones, you may create your own <cite>PathConfig</cite> class
+from an existing one, or generate a config from an existing prod type and edit the file manually.</p>
+<p>Once you have your configuration file, you way launch the pipeline with the described stages in the config using:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lstmcpipe</span> <span class="o">-</span><span class="n">c</span> <span class="n">config_MC_prod</span><span class="o">.</span><span class="n">yml</span> <span class="o">-</span><span class="n">conf_lst</span> <span class="n">lstchain_</span><span class="o">*.</span><span class="n">json</span> <span class="p">[</span><span class="o">-</span><span class="n">conf_cta</span> <span class="n">CONFIG_FILE_CTA</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">conf_rta</span> <span class="n">CONFIG_FILE_RTA</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">debug</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">log</span><span class="o">-</span><span class="n">file</span> <span class="n">LOG_FILE</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">lstmcpipe_start.py</span></code> script is the <strong>orchestrator</strong> of the pipeline, it schedules the stages specified in the
+<code class="docutils literal notranslate"><span class="pre">onsite_MC_prod.yml</span></code> file. All the configuration related with the MC pipe must be declared in this file (stages,
+particles to be analysed, zenith, pointing, type of MC production…).</p>
+<p>Pipeline-specific configuration options (such as cleaning or model parameters) are declared in a different configuration file,
+which is passed via the options <code class="docutils literal notranslate"><span class="pre">-conf_lst/-conf_cta/-conf_rta</span></code>.</p>
+<p>Note: You can always launch this command without fear; there is an intermediate step that verifies and
+shows the configuration that you are passing to the pipeline.</p>
+<p>The use of slurms jobarrays in the r0_to_dl1 stage in combination with a limited amount of maximum jobs running at the same time
+reduces the load on the cluster compared to previous versions,
+but <strong>please note</strong> that it still requires a lot of resources to process a full MC
+production. Think about other LP-IT cluster users.</p>
+</section>
+<section id="stages">
+<h2>Stages<a class="headerlink" href="#stages" title="Permalink to this headline">¶</a></h2>
+<p>After launching of the pipeline all selected tasks will be performed in order.
+These are referred to as <em>stages</em> and are collected in <code class="docutils literal notranslate"><span class="pre">lstmcpipe/stages</span></code>.
+Following is a short overview over each stage, that can be specified in the configuration.</p>
+<p><strong>r0_to_dl1</strong></p>
+<p>In this stage simtel-files are processed up to datalevel 1 and separated into files for training
+and for testing.
+For efficiency reasons files are processed in batches: N files (depending on paricle type
+as that influences the averages duration of the processing) are submitted as one job in a jobarray.
+To group the files together, the paths are saved in files that are passed to
+python scripts in <code class="docutils literal notranslate"><span class="pre">lstmcpipe/scripts</span></code> which then call the selected pipelines
+processing tool. These are:</p>
+<ul class="simple">
+<li><p>lstchain: lstchain_mc_r0_to_dl1</p></li>
+<li><p>ctapipe: ctapipe-stage1</p></li>
+<li><p>rta: lstmcpipe_hiperta_r0_to_dl1lstchain (<code class="docutils literal notranslate"><span class="pre">lstmcpipe/hiperta/hiperta_r0_to_dl1lstchain.py</span></code>)</p></li>
+</ul>
+<p><strong>dl1ab</strong></p>
+<p>As an alternative to the processing of simtel r0 files, existing dl1 files can be reprocessed.
+This can be useful to apply different cleanings or alter the images by adding noise etc.
+For this to work the old files have to contain images, i.e. they need to have been processed
+using the <code class="docutils literal notranslate"><span class="pre">no_image:</span> <span class="pre">False</span></code> flag in the config.
+The config key <code class="docutils literal notranslate"><span class="pre">dl1_reference_id</span></code> is used to determine the input files.
+Its value needs to be the full prod_id including software versions (i.e. the name of the
+directories directly above the dl1 files).
+For lstchain the dl1ab script is used, ctapipe can use the same script as for simtel
+processing. There is no support for hiperta!</p>
+<p><strong>merge_dl1</strong></p>
+<p>In this stage the previously created dl1 files are merged so that you end up with
+train and test datesets for the next stages.</p>
+<p><strong>train_test_split</strong></p>
+<p>Split the dataset into training and testing datasets, performing a random selection of files with the specified ratio
+(default=0.5).</p>
+<p><strong>train_pipe</strong></p>
+<p>IMPORTANT: From here on out only <code class="docutils literal notranslate"><span class="pre">lstchain</span></code> tools are available. More about that at the end.</p>
+<p>In this stage the models to reconstruct the primary particles properties are trained
+on the gamma-diffuse and proton train data.
+At present this means that random forests are created using lstchains
+<code class="docutils literal notranslate"><span class="pre">lstchain_mc_trainpipe</span></code>
+Models will be stored in the <code class="docutils literal notranslate"><span class="pre">models</span></code> directory.</p>
+<p><strong>dl1_to_dl2</strong></p>
+<p>The previously trained models are evaluated on the merged dl1 files using <code class="docutils literal notranslate"><span class="pre">lstchain_dl1_to_dl2</span></code> from
+the lstchain package.
+DL2 data can be found in <code class="docutils literal notranslate"><span class="pre">DL2</span></code> directory.</p>
+<p><strong>dl2_to_irfs</strong></p>
+<p>Point-like IRFs are produced for each set of offset gammas.
+The processing is performed by calling <code class="docutils literal notranslate"><span class="pre">lstchain_create_irf_files</span></code>.</p>
+<p><strong>dl2_to_sensitivity</strong>
+A sensitivity curve is estimated using a script based on pyirf which performs a cut optimisation
+similar to EventDisplay.
+The script can be found in <code class="docutils literal notranslate"><span class="pre">lstmcpipe/scripts/script_dl2_to_sensitivity.py</span></code>.
+This does not use the IRFs and cuts computed in dl2_to_irfs, so this can not be compared to observed data.
+It is a mere benchmark for the pipeline.</p>
+</section>
+<section id="logs-and-data-output">
+<h2>Logs and data output<a class="headerlink" href="#logs-and-data-output" title="Permalink to this headline">¶</a></h2>
+<p><strong>NOTE</strong>: <code class="docutils literal notranslate"><span class="pre">lstmcpipe</span></code> expects the data to be located in a specific structure on the cluster.
+Output will be written in a stanardized way next to the input data to make sure everyone can access it.
+Analysing a custom dataset requires replicating parts of the directory structure and is not the
+intended use case for this package.</p>
+<p>All the <code class="docutils literal notranslate"><span class="pre">`r0_to_dl1</span></code> stage job logs are stored <code class="docutils literal notranslate"><span class="pre">/fefs/aswg/data/mc/running_analysis/.../job_logs</span></code> and later
+moved to <code class="docutils literal notranslate"><span class="pre">/fefs/aswg/data/mc/analysis_logs/.../</span></code>.</p>
+<p>Every time a full MC production is launched, two files with logging information are created:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">log_reduced_Prod{3,5}_{PROD_ID}.yml</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">log_onsite_mc_r0_to_dl3_Prod{3,5}_{PROD_ID}.yml</span></code></p></li>
+</ul>
+<p>The first one contains a reduced summary of all the scheduled <cite>job ids</cite> (to which particle the job corresponds to),
+while the second one contains the same plus all the commands passed to slurm.</p>
+</section>
+<section id="steps-explanation">
+<h2>Steps explanation<a class="headerlink" href="#steps-explanation" title="Permalink to this headline">¶</a></h2>
+<p>The directory structure and the stages to run are determined by the config stages.
+After that, the job dependency between stages is done automatically.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>If the full workflow is launched, directories will not be verified as containing data. Overwriting will only happen when a MC prods sharing the same <code class="docutils literal notranslate"><span class="pre">prod_id</span></code> and analysed the same day is run</p></li>
+<li><p>If each step is launched independently (advanced users), no overwriting directory will take place prior confirmation from the user</p></li>
+</ul>
+</div></blockquote>
+<p>Example of default directory structure for a prod5 MC prod:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>/fefs/aswg/data/
+ ├── mc/
+ |   ├── DL0/20200629_prod5_trans_80/{particle}/zenith_20deg/south_pointing/
+ |   |   └── simtel files
+ |   |
+ |   ├── running_analysis/20200629_prod5_trans_80/{particle}/zenith_20deg/south_pointing/
+ |   |   └── YYYYMMDD_v{lstchain}_{prod_id}/
+ |   |       └── temporary dir for r0_to_dl1 + merging stages
+ |   |
+ |   ├── analysis_logs/20200629_prod5_trans_80/{particle}/zenith_20deg/south_pointing/
+ |   |   └── YYYYMMDD_v{lstchain}_{prod_id}/
+ |   |       ├── file_lists_training/
+ |   |       ├── file_lists_testing/
+ |   |       └── job_logs/
+ |   |
+ |   ├── DL1/20200629_prod5_trans_80/{particle}/zenith_20deg/south_pointing/
+ |   |   └── YYYYMMDD_v{lstchain}_{prod_id}/
+ |   |       ├── dl1 files
+ |   |       ├── training/
+ |   |       └── testing/
+ |   |
+ |   ├── DL2/20200629_prod5_trans_80/{particle}/zenith_20deg/south_pointing/
+ |   |   └── YYYYMMDD_v{lstchain}_{prod_id}/
+ |   |       └── dl2 files
+ |   |
+ |   └── IRF/20200629_prod5_trans_80/zenith_20deg/south_pointing/
+ |       └── YYYYMMDD_v{lstchain}_{prod_id}/
+ |           ├── off0.0deg/
+ |           ├── off0.4deg/
+ |           └── diffuse/
+ |
+ └── models/
+     └── 20200629_prod5_trans_80/zenith_20deg/south_pointing/
+         └── YYYYMMDD_v{lstchain}_{prod_id}/
+             ├── reg_energy.sav
+             ├── reg_disp_vector.sav
+             └── cls_gh.sav
+</pre></div>
+</div>
+</section>
+<section id="real-data-analysis">
+<h2>Real Data analysis<a class="headerlink" href="#real-data-analysis" title="Permalink to this headline">¶</a></h2>
+<p>Real data analysis is not supposed to be supported by these scripts. Use at your own risk.</p>
+</section>
+<section id="pipeline-support">
+<h2>Pipeline Support<a class="headerlink" href="#pipeline-support" title="Permalink to this headline">¶</a></h2>
+<p>So far the reference pipeline is <code class="docutils literal notranslate"><span class="pre">lstchain</span></code> and only with it a full analysis is possible.
+There is however support for <code class="docutils literal notranslate"><span class="pre">ctapipe</span></code> and <code class="docutils literal notranslate"><span class="pre">hiperta</span></code> as well.
+The processing up to dl1 is relatively agnostic of the pipeline; working implementations exist for all of them.</p>
+<p>In the case of <code class="docutils literal notranslate"><span class="pre">hiperta</span></code> a custom script converts the dl1 output to <code class="docutils literal notranslate"><span class="pre">lstchain</span></code> compatible files and the later stages
+run using <code class="docutils literal notranslate"><span class="pre">lstchain</span></code> scripts.</p>
+<p>In the case of <code class="docutils literal notranslate"><span class="pre">ctapipe</span></code> dl1 files can be produced using <code class="docutils literal notranslate"><span class="pre">ctapipe-stage1</span></code>. Once the dependency issues are solved and
+ctapipe 0.12 is released, this will most likely switch to using <code class="docutils literal notranslate"><span class="pre">ctapipe-process</span></code>. We do not have plans to keep supporting older
+versions longer than necessary currently.
+Because the files are not compatible to <code class="docutils literal notranslate"><span class="pre">lstchain</span></code> and there is no support for higher datalevels in <code class="docutils literal notranslate"><span class="pre">ctapipe</span></code> yet, it is not possible
+to use any of the following stages. This might change in the future.</p>
+</section>
+</section>
+<section id="lstmcpipe-api-documentation">
+<h1>lstmcpipe API documentation<a class="headerlink" href="#lstmcpipe-api-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="productions.html">Production list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline.html">lstmcpipe pipelines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline.html#prod3-prod5-pipelines">Prod3 &amp; Prod5 pipelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline.html#allsky-production-pipeline">AllSky production pipeline</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pipeline.html#r0-to-irfs">R0 to IRFs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline.html#dl1ab">DL1ab</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/lstmcpipe.html">lstmcpipe package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/lstmcpipe.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/lstmcpipe.benchmarks.html">lstmcpipe.benchmarks package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/lstmcpipe.config.html">lstmcpipe.config package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/lstmcpipe.hiperta.html">lstmcpipe.hiperta package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/lstmcpipe.io.html">lstmcpipe.io package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/lstmcpipe.plots.html">lstmcpipe.plots package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/lstmcpipe.scripts.html">lstmcpipe.scripts package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/lstmcpipe.stages.html">lstmcpipe.stages package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/lstmcpipe.tests.html">lstmcpipe.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/lstmcpipe.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/lstmcpipe.html#module-lstmcpipe.logging">lstmcpipe.logging module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/lstmcpipe.html#lstmcpipe-lstmcpipe-start-module">lstmcpipe.lstmcpipe_start module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/lstmcpipe.html#module-lstmcpipe.utils">lstmcpipe.utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/lstmcpipe.html#module-lstmcpipe.version">lstmcpipe.version module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/lstmcpipe.html#module-lstmcpipe.workflow_management">lstmcpipe.workflow_management module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/lstmcpipe.html#module-lstmcpipe">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">lstmcpipe</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="productions.html">Production list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline.html">lstmcpipe pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/lstmcpipe.html">lstmcpipe package</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="productions.html" title="next chapter">Production list</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;Thomas Vuillaume,Enrique Garcia,Lukas Nickel,.  Last updated 28 May 2022 17:34.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,360 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>lstmcpipe package &#8212; lstmcpipe 0.8.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="lstmcpipe.benchmarks package" href="lstmcpipe.benchmarks.html" />
+    <link rel="prev" title="lstmcpipe pipelines" href="../pipeline.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="lstmcpipe-package">
+<h1>lstmcpipe package<a class="headerlink" href="#lstmcpipe-package" title="Permalink to this headline">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="lstmcpipe.benchmarks.html">lstmcpipe.benchmarks package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.benchmarks.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.benchmarks.html#lstmcpipe-benchmarks-irfs-module">lstmcpipe.benchmarks.irfs module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.benchmarks.html#module-lstmcpipe.benchmarks">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="lstmcpipe.config.html">lstmcpipe.config package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.config.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lstmcpipe.config.tests.html">lstmcpipe.config.tests package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lstmcpipe.config.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lstmcpipe.config.tests.html#module-lstmcpipe.config.tests.test_paths_config">lstmcpipe.config.tests.test_paths_config module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lstmcpipe.config.tests.html#module-lstmcpipe.config.tests.test_pipeline_config">lstmcpipe.config.tests.test_pipeline_config module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lstmcpipe.config.tests.html#module-lstmcpipe.config.tests">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.config.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.config.html#module-lstmcpipe.config.dl1ab_tuning">lstmcpipe.config.dl1ab_tuning module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.config.html#module-lstmcpipe.config.paths_config">lstmcpipe.config.paths_config module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.config.html#module-lstmcpipe.config.pipeline_config">lstmcpipe.config.pipeline_config module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.config.html#module-lstmcpipe.config">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="lstmcpipe.hiperta.html">lstmcpipe.hiperta package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.hiperta.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.hiperta.html#module-lstmcpipe.hiperta.hiperta_r0_to_dl1lstchain">lstmcpipe.hiperta.hiperta_r0_to_dl1lstchain module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.hiperta.html#module-lstmcpipe.hiperta.reorganize_dl1hiperta300_to_dl1lstchain060">lstmcpipe.hiperta.reorganize_dl1hiperta300_to_dl1lstchain060 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.hiperta.html#module-lstmcpipe.hiperta.reorganize_dl1hiperta_to_dl1lstchain">lstmcpipe.hiperta.reorganize_dl1hiperta_to_dl1lstchain module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.hiperta.html#module-lstmcpipe.hiperta">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="lstmcpipe.io.html">lstmcpipe.io package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.io.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lstmcpipe.io.tests.html">lstmcpipe.io.tests package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lstmcpipe.io.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lstmcpipe.io.tests.html#module-lstmcpipe.io.tests.test_data_management">lstmcpipe.io.tests.test_data_management module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lstmcpipe.io.tests.html#module-lstmcpipe.io.tests.test_lstmcpipe_tree_path">lstmcpipe.io.tests.test_lstmcpipe_tree_path module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lstmcpipe.io.tests.html#module-lstmcpipe.io.tests">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.io.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.io.html#module-lstmcpipe.io.data_management">lstmcpipe.io.data_management module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.io.html#module-lstmcpipe.io.lstmcpipe_tree_path">lstmcpipe.io.lstmcpipe_tree_path module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.io.html#module-lstmcpipe.io">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="lstmcpipe.plots.html">lstmcpipe.plots package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.plots.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.plots.html#lstmcpipe-plots-images-debug-module">lstmcpipe.plots.images_debug module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.plots.html#module-lstmcpipe.plots.plot_irfs">lstmcpipe.plots.plot_irfs module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.plots.html#module-lstmcpipe.plots.plot_models_importance">lstmcpipe.plots.plot_models_importance module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.plots.html#module-lstmcpipe.plots.pointings">lstmcpipe.plots.pointings module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.plots.html#module-lstmcpipe.plots">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="lstmcpipe.scripts.html">lstmcpipe.scripts package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.scripts.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lstmcpipe.scripts.tests.html">lstmcpipe.scripts.tests package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lstmcpipe.scripts.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lstmcpipe.scripts.tests.html#module-lstmcpipe.scripts.tests.test_lstmcpipe_validate_config">lstmcpipe.scripts.tests.test_lstmcpipe_validate_config module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lstmcpipe.scripts.tests.html#module-lstmcpipe.scripts.tests.test_scripts">lstmcpipe.scripts.tests.test_scripts module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lstmcpipe.scripts.tests.html#module-lstmcpipe.scripts.tests">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.scripts.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.scripts.html#module-lstmcpipe.scripts.generate_test_lapalma">lstmcpipe.scripts.generate_test_lapalma module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.scripts.html#module-lstmcpipe.scripts.lstmcpipe_generate_config">lstmcpipe.scripts.lstmcpipe_generate_config module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.scripts.html#module-lstmcpipe.scripts.script_batch_filelist_cta">lstmcpipe.scripts.script_batch_filelist_cta module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.scripts.html#module-lstmcpipe.scripts.script_batch_filelist_lst">lstmcpipe.scripts.script_batch_filelist_lst module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.scripts.html#module-lstmcpipe.scripts.script_batch_filelist_lst_dl1ab">lstmcpipe.scripts.script_batch_filelist_lst_dl1ab module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.scripts.html#module-lstmcpipe.scripts.script_batch_filelist_rta">lstmcpipe.scripts.script_batch_filelist_rta module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.scripts.html#module-lstmcpipe.scripts.script_compare_irfs">lstmcpipe.scripts.script_compare_irfs module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.scripts.html#lstmcpipe-scripts-script-dl2-to-sensitivity-module">lstmcpipe.scripts.script_dl2_to_sensitivity module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.scripts.html#module-lstmcpipe.scripts.script_lstmcpipe_validate_config">lstmcpipe.scripts.script_lstmcpipe_validate_config module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.scripts.html#module-lstmcpipe.scripts.script_train_test_splitting">lstmcpipe.scripts.script_train_test_splitting module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.scripts.html#module-lstmcpipe.scripts">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="lstmcpipe.stages.html">lstmcpipe.stages package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.stages.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.stages.html#module-lstmcpipe.stages.mc_dl1_to_dl2">lstmcpipe.stages.mc_dl1_to_dl2 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.stages.html#module-lstmcpipe.stages.mc_dl2_to_irfs">lstmcpipe.stages.mc_dl2_to_irfs module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.stages.html#module-lstmcpipe.stages.mc_dl2_to_sensitivity">lstmcpipe.stages.mc_dl2_to_sensitivity module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.stages.html#module-lstmcpipe.stages.mc_merge_dl1">lstmcpipe.stages.mc_merge_dl1 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.stages.html#module-lstmcpipe.stages.mc_process_dl1">lstmcpipe.stages.mc_process_dl1 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.stages.html#module-lstmcpipe.stages.mc_train">lstmcpipe.stages.mc_train module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.stages.html#module-lstmcpipe.stages.mc_train_test_splitting">lstmcpipe.stages.mc_train_test_splitting module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.stages.html#module-lstmcpipe.stages">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="lstmcpipe.tests.html">lstmcpipe.tests package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.tests.html#module-lstmcpipe.tests.test_cmd_lines">lstmcpipe.tests.test_cmd_lines module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.tests.html#module-lstmcpipe.tests.test_install">lstmcpipe.tests.test_install module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.tests.html#module-lstmcpipe.tests.test_utils">lstmcpipe.tests.test_utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.tests.html#module-lstmcpipe.tests.test_workflow_management">lstmcpipe.tests.test_workflow_management module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lstmcpipe.tests.html#module-lstmcpipe.tests">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-lstmcpipe.logging">
+<span id="lstmcpipe-logging-module"></span><h2>lstmcpipe.logging module<a class="headerlink" href="#module-lstmcpipe.logging" title="Permalink to this headline">¶</a></h2>
+<p>Helpers to setup logging. Copied and adapted from
+<a class="reference external" href="https://github.com/fact-project/aict-tools/blob/ee091fc933110ff008e32df02ee12a97e412e8b3/aict_tools/logging.py">https://github.com/fact-project/aict-tools/blob/ee091fc933110ff008e32df02ee12a97e412e8b3/aict_tools/logging.py</a></p>
+<dl class="py function">
+<dt class="sig sig-object py" id="lstmcpipe.logging.setup_logging">
+<span class="sig-prename descclassname"><span class="pre">lstmcpipe.logging.</span></span><span class="sig-name descname"><span class="pre">setup_logging</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lstmcpipe.logging.setup_logging" title="Permalink to this definition">¶</a></dt>
+<dd><p>Setup logging using the logging module
+from the python standard library. A handler for
+the terminal and optionally a file handler get setup,
+the logger is using INFO or DEBUG depending on the
+value of <cite>verbose</cite>.
+Numba logs are filtered if they are not WARNING or above,
+because numba creates thousands of lines in the output.</p>
+<dl class="simple">
+<dt>logfile: str or path-like</dt><dd><p>File to save logs to.</p>
+</dd>
+<dt>verbose: boolean</dt><dd><p>Whether to enable debug logging</p>
+</dd>
+</dl>
+<p>logging.Logger</p>
+</dd></dl>
+
+</section>
+<section id="lstmcpipe-lstmcpipe-start-module">
+<h2>lstmcpipe.lstmcpipe_start module<a class="headerlink" href="#lstmcpipe-lstmcpipe-start-module" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-lstmcpipe.utils">
+<span id="lstmcpipe-utils-module"></span><h2>lstmcpipe.utils module<a class="headerlink" href="#module-lstmcpipe.utils" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="lstmcpipe.utils.dump_lstchain_std_config">
+<span class="sig-prename descclassname"><span class="pre">lstmcpipe.utils.</span></span><span class="sig-name descname"><span class="pre">dump_lstchain_std_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'lstchain_config.json'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allsky</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lstmcpipe.utils.dump_lstchain_std_config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lstmcpipe.utils.rerun_cmd">
+<span class="sig-prename descclassname"><span class="pre">lstmcpipe.utils.</span></span><span class="sig-name descname"><span class="pre">rerun_cmd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_ntry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subdir_failures</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'failed_outputs'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">run_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lstmcpipe.utils.rerun_cmd" title="Permalink to this definition">¶</a></dt>
+<dd><p>rerun r0_to_dl1 process given by <cite>cmd</cite> as long as the exit code is 0 and number of try &lt; max_ntry
+move the failed output file to subdir failed_outputs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cmd</strong> (<em>str</em>) – </p></li>
+<li><p><strong>simtel_file</strong> (<em>Path</em>) – </p></li>
+<li><p><strong>subdir_failures</strong> (<em>str</em>) – </p></li>
+<li><p><strong>outfile</strong> (<em>Path</em>) – path to the cmd output file</p></li>
+<li><p><strong>max_ntry</strong> (<em>int</em>) – </p></li>
+<li><p><strong>run_kwargs</strong> (<em>kwargs for subprocess.run</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>ntry</strong> – number of tries actually run</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-lstmcpipe.version">
+<span id="lstmcpipe-version-module"></span><h2>lstmcpipe.version module<a class="headerlink" href="#module-lstmcpipe.version" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-lstmcpipe.workflow_management">
+<span id="lstmcpipe-workflow-management-module"></span><h2>lstmcpipe.workflow_management module<a class="headerlink" href="#module-lstmcpipe.workflow_management" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="lstmcpipe.workflow_management.batch_mc_production_check">
+<span class="sig-prename descclassname"><span class="pre">lstmcpipe.workflow_management.</span></span><span class="sig-name descname"><span class="pre">batch_mc_production_check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_jobids_all_stages</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prod_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prod_config_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logs_files</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lstmcpipe.workflow_management.batch_mc_production_check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that the dl1_to_dl2 stage, and therefore, the whole workflow has ended correctly.
+The machine information of each job will be dumped to the file.
+The file will take the form <cite>check_MC_prodID_{prod_id}_OK.txt</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dict_jobids_all_stages</strong> (<em>dict</em>) – dict containing the {stage: all_job_ids related} information</p></li>
+<li><p><strong>log_directory</strong> (<em>Path</em>) – </p></li>
+<li><p><strong>prod_id</strong> (<em>str</em>) – </p></li>
+<li><p><strong>prod_config_file</strong> (<em>str</em>) – </p></li>
+<li><p><strong>batch_config</strong> (<em>dict</em>) – </p></li>
+<li><p><strong>logs_files</strong> (<em>dict</em>) – Dictionary with logs files</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>jobid</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lstmcpipe.workflow_management.save_log_to_file">
+<span class="sig-prename descclassname"><span class="pre">lstmcpipe.workflow_management.</span></span><span class="sig-name descname"><span class="pre">save_log_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dictionary</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workflow_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lstmcpipe.workflow_management.save_log_to_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dumps a dictionary (log) into a dicts of dicts with keys each of the pipeline stages.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dictionary</strong> (<em>dict</em>) – The dictionary to be dumped to a file</p></li>
+<li><p><strong>output_file</strong> (<em>str</em><em> or </em><em>Path</em>) – Output file to store the log</p></li>
+<li><p><strong>workflow_step</strong> (<em>str</em>) – Step of the workflow, to be recorded in the log</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-lstmcpipe">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-lstmcpipe" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">lstmcpipe</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../productions.html">Production list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipeline.html">lstmcpipe pipelines</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">lstmcpipe package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lstmcpipe.benchmarks.html">lstmcpipe.benchmarks package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lstmcpipe.config.html">lstmcpipe.config package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lstmcpipe.hiperta.html">lstmcpipe.hiperta package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lstmcpipe.io.html">lstmcpipe.io package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lstmcpipe.plots.html">lstmcpipe.plots package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lstmcpipe.scripts.html">lstmcpipe.scripts package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lstmcpipe.stages.html">lstmcpipe.stages package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lstmcpipe.tests.html">lstmcpipe.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-lstmcpipe.logging">lstmcpipe.logging module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lstmcpipe-lstmcpipe-start-module">lstmcpipe.lstmcpipe_start module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-lstmcpipe.utils">lstmcpipe.utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-lstmcpipe.version">lstmcpipe.version module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-lstmcpipe.workflow_management">lstmcpipe.workflow_management module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-lstmcpipe">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../pipeline.html" title="previous chapter">lstmcpipe pipelines</a></li>
+      <li>Next: <a href="lstmcpipe.benchmarks.html" title="next chapter">lstmcpipe.benchmarks package</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;Thomas Vuillaume,Enrique Garcia,Lukas Nickel,.  Last updated 28 May 2022 17:34.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/api/lstmcpipe.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

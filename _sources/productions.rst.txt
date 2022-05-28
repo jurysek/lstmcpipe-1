@@ -1,0 +1,157 @@
+===============
+Production list
+===============
+
+Find below the list of lstmcpipe productions.
+Real source names are not provided here. To find the actual source name corresponding to its ID used in the prod ID,
+visit the `LST wiki page <https://www.lst1.iac.es/wiki/index.php/MC_analysis_and_IRF_production#lstmcpipe_productions>`_.
+
+
+==============  ========================================================================================================================================================================================================  ===================================  ====================================================================================================================================
+Request date    Directory name                                                                                                                                                                                            Prod ID                              readme
+==============  ========================================================================================================================================================================================================  ===================================  ====================================================================================================================================
+2022-03-04      `psf_tuned_zen20 <https://github.com/cta-observatory/lstmcpipe/tree/master/production_configs/psf_tuned_zen20>`_                                                                                          zen20az180_dl1ab_tuned_psf           # New Prod Config
+
+                                                                                                                                                                                                                                                               ## zen20az180_dl1ab_tuned_psf
+
+                                                                                                                                                                                                                                                               ## Short description of the config
+
+                                                                                                                                                                                                                                                               Modified standard config to tune the PSF and to run the process for zenith 20 deg, south pointing MC
+
+                                                                                                                                                                                                                                                               ## Why this config is needed
+
+                                                                                                                                                                                                                                                               For aiding in the source-independent analysis of sources like the AGNs where the NSB is weak and therefore not requiring any change.
+2022-03-04      `template_prod <https://github.com/cta-observatory/lstmcpipe/tree/master/production_configs/template_prod>`_                                                                                              template                             # New Prod Config
+
+                                                                                                                                                                                                                                                               ## template_prod
+
+                                                                                                                                                                                                                                                               ## Short description of the config
+
+                                                                                                                                                                                                                                                               Modified standard config to add twice the Crab NSB
+
+                                                                                                                                                                                                                                                               ## Why this config is needed
+
+                                                                                                                                                                                                                                                               Processing of Crab night 1054-07-15
+2022-03-04      `psf_tuned_zen40 <https://github.com/cta-observatory/lstmcpipe/tree/master/production_configs/psf_tuned_zen40>`_                                                                                          zen40az180_dl1ab_tuned_psf           # New Prod Config
+
+                                                                                                                                                                                                                                                               ## zen40az180_dl1ab_tuned_psf
+
+                                                                                                                                                                                                                                                               ## Short description of the config
+
+                                                                                                                                                                                                                                                               Modified standard config to tune the PSF and to run the process for zenith 40 deg, south pointing MC
+
+                                                                                                                                                                                                                                                               ## Why this config is needed
+
+                                                                                                                                                                                                                                                               For aiding in the source-independent analysis of sources like the AGNs where the NSB is weak and therefore not requiring any change.
+2022-03-07      `nsb_tuned_zen40_scr1 <https://github.com/cta-observatory/lstmcpipe/tree/master/production_configs/nsb_tuned_zen40_scr1>`_                                                                                zen40az180_dl1ab_tuned_nsb_src1      # NSB tuned Config
+
+                                                                                                                                                                                                                                                               ## zen40az180_dl1ab_tuned_nsb_src1
+
+                                                                                                                                                                                                                                                               ## Short description of the config
+
+                                                                                                                                                                                                                                                               Config for 40zd and 180deg with tuning to the NSB of the required field
+
+                                                                                                                                                                                                                                                               ## Why this config is needed
+
+                                                                                                                                                                                                                                                               Processing of data with specific NSB
+2022-03-08      `nsb_psf_tuned_zen40_src2 <https://github.com/cta-observatory/lstmcpipe/tree/master/production_configs/nsb_psf_tuned_zen40_src2>`_                                                                        zen40az180_dl1ab_tuned_nsb_psf_src2  # Ze40 south pointing Config
+
+                                                                                                                                                                                                                                                               ## zen40az180_dl1ab_tuned_nsb_psf_src2
+
+                                                                                                                                                                                                                                                               ## Short description of the config
+
+                                                                                                                                                                                                                                                               Config for ze40 and south pointing with PSF and NSB tuned on data
+
+                                                                                                                                                                                                                                                               ## Why this config is needed
+
+                                                                                                                                                                                                                                                               Processing of data for which tuned MC is missing
+2022-03-16      `20210416_v0.7.3_prod5_trans_80_local_taicut_8_4 <https://github.com/cta-observatory/lstmcpipe/tree/master/production_configs/20210416_v0.7.3_prod5_trans_80_local_taicut_8_4>`_                          local_taicut_8_4                     #Official prod
+
+                                                                                                                                                                                                                                                               ##20210416_v0.7.3_prod5_trans_80_local_taicut_8_4
+2022-03-16      `20210506_v0.7.3_prod5_trans_80_zen40deg_local_tailcut_8_4 <https://github.com/cta-observatory/lstmcpipe/tree/master/production_configs/20210506_v0.7.3_prod5_trans_80_zen40deg_local_tailcut_8_4>`_      zen40deg_local_tailcut_8_4           #Official prod
+
+                                                                                                                                                                                                                                                               ##20210506_v0.7.3_prod5_trans_80_zen40deg_local_tailcut_8_4
+2022-03-16      `20210923_v0.7.5_prod5_trans_80_dynamic_cleaning <https://github.com/cta-observatory/lstmcpipe/tree/master/production_configs/20210923_v0.7.5_prod5_trans_80_dynamic_cleaning>`_                          dynamic_cleaning                     #Official prod
+
+                                                                                                                                                                                                                                                               ##20210923_v0.7.5_prod5_trans_80_dynamic_cleaning
+2022-03-16      `20220218_v0.9.2_prod5_trans_80_dl1ab_tune_MC_to_Crab <https://github.com/cta-observatory/lstmcpipe/tree/master/production_configs/20220218_v0.9.2_prod5_trans_80_dl1ab_tune_MC_to_Crab>`_                dl1ab_tune_MC_to_Crab                #Official prod
+
+                                                                                                                                                                                                                                                               ##20220218_v0.9.2_prod5_trans_80_dl1ab_tune_MC_to_Crab
+2022-03-16      `20220304_v0.9.3_prod5_trans_80_zen40az180_local_tailcut_8_4 <https://github.com/cta-observatory/lstmcpipe/tree/master/production_configs/20220304_v0.9.3_prod5_trans_80_zen40az180_local_tailcut_8_4>`_  zen40az180_local_tailcut_8_4         #Official prod
+
+                                                                                                                                                                                                                                                               ##20220304_v0.9.3_prod5_trans_80_zen40az180_local_tailcut_8_4
+2022-03-21      `20220215_v0.9.1_prod5_trans_80_local_tailcut_8_4 <https://github.com/cta-observatory/lstmcpipe/tree/master/production_configs/20220215_v0.9.1_prod5_trans_80_local_tailcut_8_4>`_                        local_tailcut_8_4                    # Official prod
+
+                                                                                                                                                                                                                                                               ## 20220215_v0.9.1_prod5_trans_80_local_tailcut_8_4
+2022-05-20      `20220511_v0.9.6_allsky_std <https://github.com/cta-observatory/lstmcpipe/tree/master/production_configs/20220511_v0.9.6_allsky_std>`_                                                                    20220511_allsky_std                  # 20220511_v0.9.6_allsky_std
+
+                                                                                                                                                                                                                                                               AllSky production with standard lstchain config (no tuning) for the following declinations:
+
+                                                                                                                                                                                                                                                               ['dec_2276','dec_3476','dec_4822','dec_931','dec_min_413']
+2022-05-20      `20220518_v0.9.6_allsky_dec2276_tuned <https://github.com/cta-observatory/lstmcpipe/tree/master/production_configs/20220518_v0.9.6_allsky_dec2276_tuned>`_                                                20220518_allsky_dec2276_tuned        # 20220518_allsky_dec2276_tuned
+
+                                                                                                                                                                                                                                                               - DL1ab processing from `20220511_allsky_std` production from dec_2276
+                                                                                                                                                                                                                                                               - workflow stages:
+                                                                                                                                                                                                                                                                   - dl1ab
+                                                                                                                                                                                                                                                                   - merge_dl1
+                                                                                                                                                                                                                                                                   - train_pipe
+                                                                                                                                                                                                                                                                   - dl1_to_dl2
+                                                                                                                                                                                                                                                                   - dl2_to_irfs
+
+                                                                                                                                                                                                                                                               - lstchain config provided by Abelardo
+
+                                                                                                                                                                                                                                                               - paths: `/fefs/aswg/data/mc/{data_level}/AllSky/20220518_allsky_dec2276_tuned/{train_test}/dec_2276/`
+2022-05-24      `20220523_allsky_std <https://github.com/cta-observatory/lstmcpipe/tree/master/production_configs/20220523_allsky_std>`_                                                                                  20220523_allsky_std                  # 20220523_allsky_std
+
+
+                                                                                                                                                                                                                                                               Standard production (no tuning) for declinations 6676 and min_2924
+
+
+                                                                                                                                                                                                                                                               ## Paths
+
+                                                                                                                                                                                                                                                               ```
+                                                                                                                                                                                                                                                               /fefs/aswg/data/mc/IRF/AllSky/20220523_allsky_std/TestingDataset/{dec}/{node}/
+
+                                                                                                                                                                                                                                                               /fefs/aswg/data/models/AllSky/20220523_allsky_std/{dec}/
+                                                                                                                                                                                                                                                               ```
+2022-05-24      `20220523_src3_dec3476_4822_tuned_nsb <https://github.com/cta-observatory/lstmcpipe/tree/master/production_configs/20220523_src3_dec3476_4822_tuned_nsb>`_                                                src3_dec3476_4822_tuned_nsb          # Source with dec 3476/4822 and NSB tuning
+
+                                                                                                                                                                                                                                                               ## 20220523
+
+                                                                                                                                                                                                                                                               ## Short description of the config
+
+                                                                                                                                                                                                                                                               Config for a source with dec 3476/4822 and NSB tuning:
+
+                                                                                                                                                                                                                                                                   "image_modifier": {
+                                                                                                                                                                                                                                                                       "increase_nsb": true,
+                                                                                                                                                                                                                                                                       "extra_noise_in_dim_pixels": 0.977,
+                                                                                                                                                                                                                                                                       "extra_bias_in_dim_pixels": 0.388,
+                                                                                                                                                                                                                                                                       "transition_charge": 8,
+                                                                                                                                                                                                                                                                       "extra_noise_in_bright_pixels": 1.197
+                                                                                                                                                                                                                                                                   }
+
+                                                                                                                                                                                                                                                               ## Why this config is needed
+
+                                                                                                                                                                                                                                                               See wiki page (src 3)
+                                                                                                                                                                                                                                                               https://www.lst1.iac.es/wiki/index.php/MC_analysis_and_IRF_production#lstmcpipe_productions
+2022-05-25      `20220523_dec_413_tuned_nsb <https://github.com/cta-observatory/lstmcpipe/tree/master/production_configs/20220523_dec_413_tuned_nsb>`_                                                                    galsource_min_413_tuned_nsb          # Galactic source with dec minus 413 and NSB tuning
+
+                                                                                                                                                                                                                                                               ## 20220523
+
+                                                                                                                                                                                                                                                               ## Short description of the config
+
+                                                                                                                                                                                                                                                               Config for a galactic source with dec min_413 and NSB tuning:
+
+                                                                                                                                                                                                                                                               "image_modifier": {
+                                                                                                                                                                                                                                                                       "increase_nsb": true,
+                                                                                                                                                                                                                                                                       "extra_noise_in_dim_pixels": 0.937
+                                                                                                                                                                                                                                                                       "extra_bias_in_dim_pixels": 0.323
+                                                                                                                                                                                                                                                                       "transition_charge": 8,
+                                                                                                                                                                                                                                                                       "extra_noise_in_bright_pixels": 1.041
+                                                                                                                                                                                                                                                                   }
+
+
+                                                                                                                                                                                                                                                               ## Why this config is needed
+
+                                                                                                                                                                                                                                                               Processing of data taken from this galactic source which has a particular NSB level
+==============  ========================================================================================================================================================================================================  ===================================  ====================================================================================================================================

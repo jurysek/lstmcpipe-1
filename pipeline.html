@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>lstmcpipe pipelines &#8212; lstmcpipe 0.8.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="lstmcpipe package" href="api/lstmcpipe.html" />
+    <link rel="prev" title="Production list" href="productions.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="lstmcpipe-pipelines">
+<h1>lstmcpipe pipelines<a class="headerlink" href="#lstmcpipe-pipelines" title="Permalink to this headline">¶</a></h1>
+<section id="prod3-prod5-pipelines">
+<h2>Prod3 &amp; Prod5 pipelines<a class="headerlink" href="#prod3-prod5-pipelines" title="Permalink to this headline">¶</a></h2>
+<p>Here is the typical MC pipeline for the prod3 and prod5 productions</p>
+<div class="mermaid">
+            flowchart LR
+    subgraph R0
+        gamma[R0 gamma]
+        proton[R0 proton]
+        electron[R0 electron]
+    end
+
+    gamma --&gt; |r0_to_dl1| gamma_dl1[DL1 gamma]
+    proton --&gt; |r0_to_dl1| proton_dl1[DL1 proton]
+    electron --&gt; |r0_to_dl1| electron_dl1[DL1 electron]
+
+    subgraph DL1
+        direction LR
+        gamma_dl1
+        proton_dl1
+        electron_dl1
+    end
+
+
+    subgraph DL1-test[DL1 test]
+        direction LR
+        gamma_dl1_test[DL1 gamma]
+        proton_dl1_test[DL1 proton]
+        electron_dl1_test[DL1 electron]
+    end
+
+    subgraph DL1-train[DL1 train]
+        gamma_dl1_train[DL1 gamma]
+        proton_dl1_train[DL1 proton]
+    end
+
+
+    gamma_dl1 --&gt; train_test_split((train_test_split))
+    proton_dl1 --&gt; train_test_split
+    train_test_split --&gt; DL1-train
+    train_test_split --&gt; gamma_dl1_test &amp; proton_dl1_test
+    DL1-train --&gt; train_pipe((train_pipe))
+    train_pipe --&gt; models
+
+    electron_dl1 --&gt; electron_dl1_test
+
+    subgraph DL2-test[DL2 test]
+        direction LR
+        gamma_dl2_test[DL2 gamma]
+        proton_dl2_test[DL2 proton]
+        electron_dl2_test[DL2 electron]
+    end
+
+    models --&gt; DL2-test
+    DL1-test --&gt; DL2-test
+
+    DL2-test --&gt; |dl2_to_irf| IRF[IRFs]
+    DL2-test --&gt; |dl2_to_sensitivity| SENS[Sensitivity]
+    SENS --&gt; plot[png plots]
+        </div><p>One can also start back from DL1, applying the dl1ab stage:</p>
+<div class="mermaid">
+            flowchart LR
+    subgraph DL1a
+        gamma[DL1 gamma]
+        proton[DL1 proton]
+        electron[DL1 electron]
+    end
+
+    gamma --&gt; |dl1ab| gamma_dl1[DL1 gamma]
+    proton --&gt; |dl1ab| proton_dl1[DL1 proton]
+    electron --&gt; |dl1ab| electron_dl1[DL1 electron]
+
+    subgraph DL1b
+        direction LR
+        gamma_dl1
+        proton_dl1
+        electron_dl1
+    end
+
+
+    subgraph DL1-test[DL1 test]
+        direction LR
+        gamma_dl1_test[DL1 gamma]
+        proton_dl1_test[DL1 proton]
+        electron_dl1_test[DL1 electron]
+    end
+
+    subgraph DL1-train[DL1 train]
+        gamma_dl1_train[DL1 gamma]
+        proton_dl1_train[DL1 proton]
+    end
+
+
+    gamma_dl1 --&gt; train_test_split((train_test_split))
+    proton_dl1 --&gt; train_test_split
+    train_test_split --&gt; DL1-train
+    train_test_split --&gt; gamma_dl1_test &amp; proton_dl1_test
+    DL1-train --&gt; train_pipe((train_pipe))
+    train_pipe --&gt; models
+
+    electron_dl1 --&gt; electron_dl1_test
+
+    subgraph DL2-test[DL2 test]
+        direction LR
+        gamma_dl2_test[DL2 gamma]
+        proton_dl2_test[DL2 proton]
+        electron_dl2_test[DL2 electron]
+    end
+
+    models --&gt; DL2-test
+    DL1-test --&gt; DL2-test
+
+    DL2-test --&gt; |dl2_to_irf| IRF[IRFs]
+    DL2-test --&gt; |dl2_to_sensitivity| SENS[Sensitivity]
+    SENS --&gt; plot[png plots]
+        </div></section>
+<section id="allsky-production-pipeline">
+<h2>AllSky production pipeline<a class="headerlink" href="#allsky-production-pipeline" title="Permalink to this headline">¶</a></h2>
+<section id="r0-to-irfs">
+<h3>R0 to IRFs<a class="headerlink" href="#r0-to-irfs" title="Permalink to this headline">¶</a></h3>
+<p>Standard AllSky production pipeline <strong>for one training declination</strong></p>
+<div class="mermaid">
+            flowchart LR
+
+    R0-Protons[R0 Protons \n - node a\n - node b\n - node c]
+    R0-GammaDiffuse[R0 GammaDiffuse \n - node a\n - node b\n - node c]
+    R0-GammaCrab[R0 Gamma Crab \n - node a\n - node b\n - node c]
+
+    DL1-Protons[DL1 Protons \n - node a\n - node b\n - node c]
+    DL1-GammaDiffuse[DL1 GammaDiffuse \n - node a\n - node b\n - node c]
+    DL1-GammaCrab[DL1 Gamma Crab \n - node a\n - node b\n - node c]
+
+
+    R0-GammaDiffuse --&gt; |r0_to_dl1| DL1-GammaDiffuse
+    R0-Protons --&gt; |r0_to_dl1| DL1-Protons
+    R0-GammaCrab --&gt; |r0_to_dl1| DL1-GammaCrab
+
+
+    DL1-GammaDiffuse --&gt; |merge_dl1| DL1-GammaDiffuse-merged[DL1 Gamma Diffuse\nall nodes]
+    DL1-Protons --&gt; |merge_dl1| DL1-Protons-merged[DL1 Protons\nall nodes]
+
+    DL1-GammaDiffuse-merged &amp; DL1-Protons-merged --&gt; train_pipe((train_pipe))
+
+    train_pipe --&gt; models
+
+    models --&gt; DL2-GammaCrab
+
+    DL1-GammaCrab --&gt; |merge_dl1| DL1-GammaCrab-merged[DL1 Gamma Crab \n - node a merged\n - node b merged\n - node c merged]
+    DL1-GammaCrab-merged ----&gt; DL2-GammaCrab
+    DL2-GammaCrab[DL2 Gamma Crab \n - node a merged\n - node b merged\n - node c merged]
+
+    DL2-GammaCrab --&gt; |dl2_to_irf| IRF-GammaCrab
+    IRF-GammaCrab[IRF Gamma Crab \n - node a merged\n - node b merged\n - node c merged]
+        </div><p>To produce a config to run such a pipeline, typically run <strong>on the cluster</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lstmcpipe_generate_config</span> <span class="n">PathConfigAllSkyFull</span> <span class="o">--</span><span class="n">prod_id</span> <span class="n">whatagreatprod</span> <span class="o">--</span><span class="n">dec_list</span> <span class="n">dec_2276</span>
+</pre></div>
+</div>
+<p>This will generate a lstmcpipe config file and a lstchain config file.</p>
+<dl class="simple">
+<dt>Please:</dt><dd><ul class="simple">
+<li><p>check thoroughly the lstmcpipe config</p></li>
+<li><p>modify the lstchain config as you wish</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="dl1ab">
+<h3>DL1ab<a class="headerlink" href="#dl1ab" title="Permalink to this headline">¶</a></h3>
+<p>The DL1ab workflow is very similar, only starting from an existing DL1 dataset.</p>
+<p>You typically want to run <strong>on the cluster</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lstmcpipe_generate_config</span> <span class="n">PathConfigAllSkyFullDL1ab</span> <span class="o">--</span><span class="n">dec_list</span> <span class="n">dec_2276</span> <span class="o">--</span><span class="n">source_prod_id</span> <span class="n">whatagreatprod</span> <span class="o">--</span><span class="n">target_prod_id</span> <span class="n">anothergreatprod</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">lstmcpipe</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="productions.html">Production list</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">lstmcpipe pipelines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prod3-prod5-pipelines">Prod3 &amp; Prod5 pipelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#allsky-production-pipeline">AllSky production pipeline</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#r0-to-irfs">R0 to IRFs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dl1ab">DL1ab</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/lstmcpipe.html">lstmcpipe package</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="productions.html" title="previous chapter">Production list</a></li>
+      <li>Next: <a href="api/lstmcpipe.html" title="next chapter">lstmcpipe package</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;Thomas Vuillaume,Enrique Garcia,Lukas Nickel,.  Last updated 28 May 2022 17:34.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/pipeline.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
